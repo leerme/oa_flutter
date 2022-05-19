@@ -92,16 +92,19 @@ class _MyHomePageState extends State<MyHomePage> {
           final imageName = imageNameModel[index];
           return Container(
             alignment: Alignment(0, 0),
-            color: Colors.white,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10),
+            ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(15.0),
+                  padding: const EdgeInsets.fromLTRB(15, 0, 10, 0),
                   child: Image.asset(
                     "assets/images/home_page/$imageName.png",
-                    height: 30,
-                    width: 30,
+                    height: 25,
+                    width: 25,
                   ),
                 ),
                 Text(titleModel[index]),
