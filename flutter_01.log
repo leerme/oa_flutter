@@ -1,0 +1,94 @@
+Flutter crash report.
+Please report a bug at https://github.com/flutter/flutter/issues.
+
+## command
+
+flutter --no-color packages get
+
+## exception
+
+FileSystemException: FileSystemException: Deletion failed, path = '/Users/yulei/Project/flutter_oa/.ios/Flutter/teacher.podspec' (OS Error: No such file or directory, errno = 2)
+
+```
+#0      _Directory._deleteSync (dart:io/directory_impl.dart:201:7)
+#1      FileSystemEntity.deleteSync (dart:io/file_system_entity.dart:412:7)
+#2      _File._deleteSync (dart:io/file_impl.dart:295:50)
+#3      FileSystemEntity.deleteSync (dart:io/file_system_entity.dart:412:7)
+#4      ForwardingFileSystemEntity.deleteSync (package:file/src/forwarding/forwarding_file_system_entity.dart:70:16)
+#5      ForwardingFileSystemEntity.deleteSync (package:file/src/forwarding/forwarding_file_system_entity.dart:70:16)
+#6      Template.render.<anonymous closure> (package:flutter_tools/src/template.dart:274:32)
+#7      _LinkedHashMapMixin.forEach (dart:collection-patch/compact_hash.dart:614:13)
+#8      Template.render (package:flutter_tools/src/template.dart:253:24)
+#9      IosProject._overwriteFromTemplate (package:flutter_tools/src/xcode_project.dart:499:14)
+<asynchronous suspension>
+#10     IosProject._regenerateFromTemplateIfNeeded (package:flutter_tools/src/xcode_project.dart:386:5)
+<asynchronous suspension>
+#11     IosProject.ensureReadyForPlatformSpecificTooling (package:flutter_tools/src/xcode_project.dart:321:5)
+<asynchronous suspension>
+#12     FlutterProject.ensureReadyForPlatformSpecificTooling (package:flutter_tools/src/project.dart:364:7)
+<asynchronous suspension>
+#13     PackagesGetCommand.runCommand (package:flutter_tools/src/commands/packages.dart:177:5)
+<asynchronous suspension>
+#14     FlutterCommand.run.<anonymous closure> (package:flutter_tools/src/runner/flutter_command.dart:1183:27)
+<asynchronous suspension>
+#15     AppContext.run.<anonymous closure> (package:flutter_tools/src/base/context.dart:150:19)
+<asynchronous suspension>
+#16     CommandRunner.runCommand (package:args/command_runner.dart:209:13)
+<asynchronous suspension>
+#17     FlutterCommandRunner.runCommand.<anonymous closure> (package:flutter_tools/src/runner/flutter_command_runner.dart:281:9)
+<asynchronous suspension>
+#18     AppContext.run.<anonymous closure> (package:flutter_tools/src/base/context.dart:150:19)
+<asynchronous suspension>
+#19     FlutterCommandRunner.runCommand (package:flutter_tools/src/runner/flutter_command_runner.dart:229:5)
+<asynchronous suspension>
+#20     run.<anonymous closure>.<anonymous closure> (package:flutter_tools/runner.dart:62:9)
+<asynchronous suspension>
+#21     AppContext.run.<anonymous closure> (package:flutter_tools/src/base/context.dart:150:19)
+<asynchronous suspension>
+#22     main (package:flutter_tools/executable.dart:94:3)
+<asynchronous suspension>
+```
+
+## flutter doctor
+
+```
+[✓] Flutter (Channel stable, 3.0.0, on macOS 11.6 20G165 darwin-x64, locale zh-Hans-CN)
+    • Flutter version 3.0.0 at /Users/yulei/flutter
+    • Upstream repository https://github.com/flutter/flutter.git
+    • Framework revision ee4e09cce0 (13 days ago), 2022-05-09 16:45:18 -0700
+    • Engine revision d1b9a6938a
+    • Dart version 2.17.0
+    • DevTools version 2.12.2
+    • Pub download mirror https://pub.flutter-io.cn
+    • Flutter download mirror https://storage.flutter-io.cn
+
+[✓] Android toolchain - develop for Android devices (Android SDK version 29.0.2)
+    • Android SDK at /Users/yulei/Library/Android/sdk
+    • Platform android-32, build-tools 29.0.2
+    • Java binary at: /Applications/Android Studio.app/Contents/jre/jdk/Contents/Home/bin/java
+    • Java version OpenJDK Runtime Environment (build 1.8.0_202-release-1483-b49-5587405)
+    • All Android licenses accepted.
+
+[✓] Xcode - develop for iOS and macOS (Xcode 13.0)
+    • Xcode at /Applications/Xcode.app/Contents/Developer
+    • CocoaPods version 1.11.2
+
+[✓] Chrome - develop for the web
+    • Chrome at /Applications/Google Chrome.app/Contents/MacOS/Google Chrome
+
+[✓] Android Studio (version 3.5)
+    • Android Studio at /Applications/Android Studio.app/Contents
+    • Flutter plugin version 44.0.1
+    • Dart plugin version 191.8593
+    • Java version OpenJDK Runtime Environment (build 1.8.0_202-release-1483-b49-5587405)
+
+[✓] Connected device (3 available)
+    • Yu iPhone X (mobile) • c85d5624d6540a5e800b85452e31f01fb47e1583 • ios            • iOS 13.3 17C54
+    • macOS (desktop)      • macos                                    • darwin-x64     • macOS 11.6 20G165 darwin-x64
+    • Chrome (web)         • chrome                                   • web-javascript • Google Chrome 101.0.4951.64
+
+[✓] HTTP Host Availability
+    • All required HTTP hosts are available
+
+• No issues found!
+```
