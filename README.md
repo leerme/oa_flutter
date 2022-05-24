@@ -1,6 +1,6 @@
 # teacher
 
-flutter_oa
+在OA项目中加入flutter，混合开发
 
 ## Getting Started
 
