@@ -30,6 +30,7 @@ dependencies:
   dio: ^4.0.6
   dio_cookie_manager: ^2.0.0
   cookie_jar: 3.0.1
+  fluttertoast: ^8.0.9
 
 dev_dependencies:
   flutter_test:
@@ -50,6 +51,7 @@ flutter:
   assets:
     - assets/images/home_page/
     - assets/images/bar/
+    - assets/images/login/
     - assets/images/login_cover/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

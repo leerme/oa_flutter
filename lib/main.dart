@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'home/pages/home_page.dart';
 import 'login/login_cover_page.dart';
+import 'router/router.dart';
 
 void main() => runApp(const MyApp());
 
@@ -16,6 +17,9 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: const LoginCoverPage(),
+      routes: FBRouter.routers,
+      onGenerateRoute: FBRouter.generateRoute,
+      onUnknownRoute: FBRouter.unKnownRoute,
     );
   }
 }

@@ -1,8 +1,11 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:teacher/login/login_page.dart';
 
 class LoginCoverPage extends StatefulWidget{
+  static const String routeName = "/LoginCoverPage";
+
   const LoginCoverPage({Key? key}) : super(key: key);
   @override
   State<LoginCoverPage> createState() => _LoginCoverPageState();
@@ -16,6 +19,22 @@ class _LoginCoverPageState extends State<LoginCoverPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
+            Expanded(
+                child: Image.asset(
+                  "assets/images/login_cover/fb_logo.png",
+                  width: 165,
+                  height: 50,
+                )
+            ),
+            GestureDetector(
+              onTap: () => _jumpToLoginPage(context),
+              child: Image.asset(
+                "assets/images/login_cover/login_cloud.png",
+                width: 121,
+                height: 90,
+              ),
+            ),
+            SizedBox(height: 40,),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -57,5 +76,9 @@ class _LoginCoverPageState extends State<LoginCoverPage> {
       ),
       backgroundColor: Colors.lightBlue,
     );
+  }
+
+  void _jumpToLoginPage(BuildContext context) {
+    Navigator.of(context).pushNamed(FBLoginPage.routeName);
   }
 }
