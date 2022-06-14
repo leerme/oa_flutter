@@ -9,6 +9,7 @@ class LYInputWidget extends StatefulWidget {
   final ValueChanged<String>? onChanged;
   final TextStyle? textStyle;
   final TextEditingController? controller;
+  final TextInputType keyboardType;
 
   const LYInputWidget(
       {Key? key,
@@ -17,6 +18,7 @@ class LYInputWidget extends StatefulWidget {
         this.onChanged,
         this.textStyle,
         this.controller,
+        this.keyboardType = TextInputType.text,
         this.obscureText = false}): super(key: key);
 
   @override
@@ -31,6 +33,7 @@ class _LYInputWidgetState extends State<LYInputWidget>{
       onChanged: widget.onChanged,
       obscureText: widget.obscureText,
       style: widget.textStyle,
+      keyboardType: widget.keyboardType,
       decoration: InputDecoration(
         hintText: widget.hintText,
         icon: widget.iconData,

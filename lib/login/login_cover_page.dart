@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:teacher/login/login_page.dart';
 
 class LoginCoverPage extends StatefulWidget{
@@ -12,6 +13,11 @@ class LoginCoverPage extends StatefulWidget{
 }
 
 class _LoginCoverPageState extends State<LoginCoverPage> {
+  @override
+  void initState() {
+    super.initState();
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

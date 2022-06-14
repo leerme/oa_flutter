@@ -1,8 +1,9 @@
 
 import 'package:flutter/material.dart';
-import '../home/pages/home_page.dart';
-import '../login/login_cover_page.dart';
-import '../login/login_page.dart';
+import 'package:teacher/home/pages/home_page.dart';
+import 'package:teacher/login/login_cover_page.dart';
+import 'package:teacher/login/login_page.dart';
+
 
 class FBRouter{
 
