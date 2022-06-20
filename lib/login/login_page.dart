@@ -1,10 +1,8 @@
-import 'dart:io';
-
+import 'dart:async';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:teacher/tool/encrypt/encrypt.dart';
-import 'package:teacher/tool/network/http_manager.dart';
 import '../widget/ly_input_widget.dart';
 
 class FBLoginPage extends StatefulWidget{
@@ -24,10 +22,11 @@ class _FBLoginPageState extends State<FBLoginPage> {
   String _userPhone = "";
   String _password = "";
   String _verifiedCode = "";
+  Timer? _timer;
+  int _seconds = -1;
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
       appBar: AppBar(
         title: const Text("登录"),
@@ -53,7 +52,7 @@ class _FBLoginPageState extends State<FBLoginPage> {
                       keyboardType: TextInputType.number,
                       onChanged: (String value) {
                         setState(() {
-                          _userPhone = value;
+                          _userPhone = value.trim();
                         });
                       },
                     ),
@@ -65,7 +64,7 @@ class _FBLoginPageState extends State<FBLoginPage> {
                       obscureText: true,
                       keyboardType: TextInputType.visiblePassword,
                       onChanged: (String value) {
-                        _password = value;
+                        _password = value.trim();
                       },
                     ),
                     const Padding(padding: EdgeInsets.all(10.0)),
@@ -77,22 +76,14 @@ class _FBLoginPageState extends State<FBLoginPage> {
                           controller: verifiedController,
                           keyboardType: TextInputType.number,
                           onChanged: (String value) {
-                            _verifiedCode = value;
+                            _verifiedCode = value.trim();
                           },
                         ),
                         Positioned(
                           right: 0,
                           bottom: 5,
                           top: 5,
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                minimumSize: const Size(100, 50)),
-                            child: Text(
-                              "获取验证码", style: TextStyle(fontSize: 14),),
-                            onPressed: (_userPhone.isNotEmpty)
-                                ? _sendVerifiedCode
-                                : null,
-                          ),
+                          child: buildSendVerifiedButton(),
                         )
                       ],
                     ),
@@ -138,59 +129,85 @@ class _FBLoginPageState extends State<FBLoginPage> {
     );
   }
 
-  _sendVerifiedCode() {
-
+  ElevatedButton buildSendVerifiedButton() {
+    var text = "获取验证码";
+    VoidCallback? onPressed = (_userPhone.isNotEmpty)
+        ? _sendVerifiedCode
+        : null;
+    if(_seconds == 0){
+      text = "重新获取";
+    }else if(_seconds > 0){
+      text = "等待"+_seconds.toString()+"s";
+      onPressed = null;
+    }
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(minimumSize: const Size(100, 50)),
+      child: Text(text, style: TextStyle(fontSize: 14),),
+      onPressed: onPressed,
+    );
   }
 
   _loginIn() async {
-//    if (_userPhone.isEmpty){
-//      Fluttertoast.showToast(
-//          msg: "请输入手机号",
-//          gravity: ToastGravity.CENTER,
-//      );
-//      return;
-//    }
-//    if (_password.isEmpty){
-//      Fluttertoast.showToast(
-//        msg: "请输入密码",
-//        gravity: ToastGravity.CENTER,
-//      );
-//      return;
-//    }
-//    if (_verifiedCode.isEmpty){
-//      Fluttertoast.showToast(
-//        msg: "请输入验证码",
-//        gravity: ToastGravity.CENTER,
-//      );
-//      return;
-//    }
+    if (_userPhone.isEmpty) {
+      Fluttertoast.showToast(
+        msg: "请输入手机号",
+        gravity: ToastGravity.CENTER,
+      );
+      return;
+    }
+    if (_password.isEmpty) {
+      Fluttertoast.showToast(
+        msg: "请输入密码",
+        gravity: ToastGravity.CENTER,
+      );
+      return;
+    }
+    if (_verifiedCode.isEmpty) {
+      Fluttertoast.showToast(
+        msg: "请输入验证码",
+        gravity: ToastGravity.CENTER,
+      );
+      return;
+    }
+    FocusScope.of(context).requestFocus(FocusNode());
+
+    Future info = Encrypt.encryption(_password);
+    info.then((value) {
+      var url = "https://login.fenbi.com/employee/public/login?system=13.3&inhouse=1&app=oa&ua=iPhone&av=3&version=1.5.3&kav=3";
+      _requestLogin(url,value);
+    });
+  }
+
+  _requestLogin (url,value) async {
+    Options options = Options(headers: {
+      Headers.contentTypeHeader:
+      Headers.formUrlEncodedContentType
+    });
+    Map<String,dynamic> map = Map();
+    map['password']=value;
+    map['phone']=_userPhone;
+    map['verifycode']=_verifiedCode;
+    Dio dio = Dio();
+    Response response = await dio.post(url,data:map,options: options);
+    if (response.statusCode == 200) {
+      print(response.data);
+      print("——————登录成功");
+    } else {
+      print("——————登录失败");
+    }
+  }
+
+  _sendVerifiedCode() {
     int date = DateTime.now().millisecondsSinceEpoch;
     String phone = "$_userPhone:"+"$date";
     Future info = Encrypt.encryption(phone);
     info.then((value) {
-      var url = "http://tiku.fenbi.com/iphone/users/phone/verification?system=13.3&inhouse=1&app=oa&ua=iPhone&av=3&version=1.5.3&kav=3";
-//      HttpManager().netFetch(url, {"info":value,"type":"retrieve"}, null, null).then((value) {
-//
-//      });
-    test(url,value);
+      var url = "http://login.fenbi.com/iphone/users/phone/verification?system=13.3&inhouse=1&app=oa&ua=iPhone&av=3&version=1.5.3&kav=3";
+      _requestVerifiedCode(url,value);
     });
-
-
-//    Dio dio = Dio();
-//    Response response=await dio.post(path)
-//    print("__$response.data");
-
-//
-//    info:""
-//    type:retrieve
   }
 
-  test (url,value) async {
-//      HttpManager().netFetch(url, {"info":value,"type":"retrieve"}, null, null).then((value) {
-//
-//      });
-//    Map p = {"info":value,"type":"retrieve"};
-
+  _requestVerifiedCode (url,value) async {
     Options options = Options(headers: {
       Headers.contentTypeHeader:
       Headers.formUrlEncodedContentType
@@ -198,9 +215,46 @@ class _FBLoginPageState extends State<FBLoginPage> {
     Map<String,dynamic> map = Map();
     map['info']=value;
     map['type']="retrieve";
-    FormData formData = FormData.fromMap(map);
     Dio dio = Dio();
     Response response = await dio.post(url,data:map,options: options);
-    print(response.data);
+    if (response.statusCode == 200) {
+      print(response.data);
+      var now = DateTime.now();
+      var minutes = now.add(const Duration(minutes: 1)).difference(now);
+      _seconds = minutes.inSeconds;
+      startTimer();
+    } else {
+      print("——————获取验证码失败");
+    }
   }
+
+  void startTimer() {
+    //设置 1 秒回调一次
+    const period = Duration(seconds: 1);
+    _timer = Timer.periodic(period, (timer) {
+      //更新界面
+      setState(() {
+        //秒数减一，因为一秒回调一次
+        _seconds--;
+      });
+      if (_seconds == 0) {
+        //倒计时秒数为0，取消定时器
+        cancelTimer();
+      }
+    });
+  }
+
+  void cancelTimer() {
+    if (_timer != null) {
+      _timer!.cancel();
+      _timer = null;
+    }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    cancelTimer();
+  }
+
 }
