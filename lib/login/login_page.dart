@@ -2,6 +2,11 @@ import 'dart:async';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:lib_network/dio_method.dart';
+import 'package:lib_network/dio_response.dart';
+import 'package:lib_network/dio_util.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:teacher/home/pages/home_page.dart';
 import 'package:teacher/tool/encrypt/encrypt.dart';
 import '../widget/ly_input_widget.dart';
 
@@ -182,20 +187,29 @@ class _FBLoginPageState extends State<FBLoginPage> {
     Options options = Options(headers: {
       Headers.contentTypeHeader:
       Headers.formUrlEncodedContentType
-    });
+    },method: "post");
     Map<String,dynamic> map = Map();
     map['password']=value;
     map['phone']=_userPhone;
     map['verifycode']=_verifiedCode;
-    Dio dio = Dio();
-    Response response = await dio.post(url,data:map,options: options);
-    if (response.statusCode == 200) {
-      print(response.data);
-      print("——————登录成功");
+    DioResponse result = await DioUtil().request(url,data: map,options: options);
+    print(result);
+    if (result.code == DioResponseCode.SUCCESS) {
+      _handleLoginSuccess(result.data);
+      Navigator.of(context).pushNamed(MyHomePage.routeName);
     } else {
-      print("——————登录失败");
+      Fluttertoast.showToast(msg: "登录失败",gravity: ToastGravity.CENTER);
     }
+//    Dio dio = Dio();
+//    Response<Map> response = await dio.post(url,data:map,options: options);
+//    if (response.statusCode == 200) {
+//      _handleLoginSuccess(response.data);
+//      Navigator.of(context).pushNamed(MyHomePage.routeName);
+//    } else {
+//      print("——————登录失败");
+//    }
   }
+
 
   _sendVerifiedCode() {
     int date = DateTime.now().millisecondsSinceEpoch;
@@ -211,21 +225,30 @@ class _FBLoginPageState extends State<FBLoginPage> {
     Options options = Options(headers: {
       Headers.contentTypeHeader:
       Headers.formUrlEncodedContentType
-    });
+    },method: "post");
     Map<String,dynamic> map = Map();
     map['info']=value;
     map['type']="retrieve";
-    Dio dio = Dio();
-    Response response = await dio.post(url,data:map,options: options);
-    if (response.statusCode == 200) {
-      print(response.data);
+    DioResponse result = await DioUtil().request(url,data:map,options:options);
+    if(result.code == DioResponseCode.SUCCESS){
       var now = DateTime.now();
       var minutes = now.add(const Duration(minutes: 1)).difference(now);
       _seconds = minutes.inSeconds;
       startTimer();
-    } else {
-      print("——————获取验证码失败");
+    }else{
+      Fluttertoast.showToast(msg: "获取验证码失败",gravity: ToastGravity.CENTER);
     }
+  }
+
+  _handleLoginSuccess(data) async {
+    print(data);
+//    String userId = data["id"];
+//    print(userId);
+    SharedPreferences prefs =await SharedPreferences.getInstance();
+    prefs.setBool("login", true);
+//    String url = 'http://tiku.fenbi.com/api/xingce/users/$userId?system=15.0&inhouse=1&app=oa&ua=iPhone&av=3&version=1.5.3&kav=3';
+//    DioResponse result = await DioUtil().request(url);
+//    print(result);
   }
 
   void startTimer() {

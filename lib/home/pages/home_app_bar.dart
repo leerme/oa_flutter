@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'package:teacher/home/model/home_service.dart';
 import 'home_native_method_channel.dart';
-
 
 class HomeAppBar extends AppBar {
   HomeAppBar(BuildContext context) : super(
@@ -24,7 +23,7 @@ class HomeAppBar extends AppBar {
             width: 50,
           ),
           onPressed: () {
-
+            HomeService().getHttp();
           })
     ],
   );

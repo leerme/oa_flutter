@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-
-
 import '../model/home_model.dart';
 import '../model/home_service.dart';
 import 'home_app_bar.dart';
-
 
 class MyHomePage extends StatefulWidget {
 
