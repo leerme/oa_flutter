@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:teacher/mine/mine_page.dart';
 import '../model/home_model.dart';
 import '../model/home_service.dart';
 import 'home_app_bar.dart';
@@ -75,10 +76,14 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       onTap: () {
-        print("$imageName $index");
+        _handleTap(index);
       },
     );
   }
 
-
+  _handleTap(index) {
+    if (index == 0) {
+      Navigator.of(context).pushNamed(MinePage.routeName);
+    }
+  }
 }

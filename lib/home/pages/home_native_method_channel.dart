@@ -8,6 +8,5 @@ class NativeMethodChannel{
   //跳转到iOS页面
   Future jumpToMineMethod() async {
     final String result = await platform.invokeMethod('jumpToMinePage');
-    print('result===');
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:teacher/home/model/home_service.dart';
+import 'package:teacher/mine/mine_page.dart';
 import 'home_native_method_channel.dart';
 
 class HomeAppBar extends AppBar {
@@ -12,7 +13,8 @@ class HomeAppBar extends AppBar {
         width: 19,
       ),
       onPressed: () {
-        NativeMethodChannel().jumpToMineMethod();
+//        NativeMethodChannel().jumpToMineMethod();
+        Navigator.of(context).pushNamed(MinePage.routeName);
       },
     ),
     actions: [

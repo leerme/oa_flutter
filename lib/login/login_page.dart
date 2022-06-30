@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:lib_network/dio_method.dart';
 import 'package:lib_network/dio_response.dart';
 import 'package:lib_network/dio_util.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -200,14 +199,6 @@ class _FBLoginPageState extends State<FBLoginPage> {
     } else {
       Fluttertoast.showToast(msg: "登录失败",gravity: ToastGravity.CENTER);
     }
-//    Dio dio = Dio();
-//    Response<Map> response = await dio.post(url,data:map,options: options);
-//    if (response.statusCode == 200) {
-//      _handleLoginSuccess(response.data);
-//      Navigator.of(context).pushNamed(MyHomePage.routeName);
-//    } else {
-//      print("——————登录失败");
-//    }
   }
 
 
@@ -241,14 +232,9 @@ class _FBLoginPageState extends State<FBLoginPage> {
   }
 
   _handleLoginSuccess(data) async {
-    print(data);
-//    String userId = data["id"];
-//    print(userId);
     SharedPreferences prefs =await SharedPreferences.getInstance();
     prefs.setBool("login", true);
 //    String url = 'http://tiku.fenbi.com/api/xingce/users/$userId?system=15.0&inhouse=1&app=oa&ua=iPhone&av=3&version=1.5.3&kav=3';
-//    DioResponse result = await DioUtil().request(url);
-//    print(result);
   }
 
   void startTimer() {

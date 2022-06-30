@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:teacher/home/pages/home_page.dart';
 import 'package:teacher/login/login_cover_page.dart';
 import 'package:teacher/login/login_page.dart';
+import 'package:teacher/mine/mine_page.dart';
 
 
 class FBRouter{
@@ -11,6 +12,7 @@ class FBRouter{
     LoginCoverPage.routeName : (ctx) => LoginCoverPage(),
     MyHomePage.routeName : (ctx) => MyHomePage(),
     FBLoginPage.routeName : (ctx) => FBLoginPage(),
+    MinePage.routeName : (ctx) => MinePage(),
   };
 
 
