@@ -13,6 +13,12 @@
       <excludeFolder url="file://$MODULE_DIR$/.ios/.symlinks/plugins/fluttertoast/example/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/.ios/.symlinks/plugins/fluttertoast/example/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/.ios/.symlinks/plugins/fluttertoast/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/.ios/.symlinks/plugins/path_provider_ios/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/.ios/.symlinks/plugins/path_provider_ios/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/.ios/.symlinks/plugins/path_provider_ios/build" />
+      <excludeFolder url="file://$MODULE_DIR$/.ios/.symlinks/plugins/path_provider_ios/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/.ios/.symlinks/plugins/path_provider_ios/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/.ios/.symlinks/plugins/path_provider_ios/example/build" />
       <excludeFolder url="file://$MODULE_DIR$/.ios/.symlinks/plugins/shared_preferences_ios/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/.ios/.symlinks/plugins/shared_preferences_ios/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/.ios/.symlinks/plugins/shared_preferences_ios/build" />

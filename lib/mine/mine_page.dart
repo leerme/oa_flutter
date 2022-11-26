@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../login/login_page.dart';
 
 class MinePage extends StatefulWidget {
   static const String routeName = "/MinePage";
@@ -136,7 +138,10 @@ class _MinePageState extends State<MinePage> {
     Fluttertoast.showToast(msg: "关于");
   }
 
-  _logout(){
+  _logout() async{
     Fluttertoast.showToast(msg: "退出登录");
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool("login", false);
+    Navigator.of(context).pushNamed(FBLoginPage.routeName);
   }
 }

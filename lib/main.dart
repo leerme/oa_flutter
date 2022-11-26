@@ -13,17 +13,16 @@ void main() {
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
   @override
-  State<MyApp> createState() => _MyAppState();
+  State<MyApp> createState() => MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class MyAppState extends State<MyApp> {
   bool loginState = false;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     DioUtil();
-    _validateLogin();
+    validateLogin();
   }
   // This widget is the root of your application.
   @override
@@ -34,6 +33,7 @@ class _MyAppState extends State<MyApp> {
         primarySwatch: Colors.blue,
       ),
       home: loginState?const MyHomePage():const LoginCoverPage(),
+//      home:const MyHomePage(),
 //      home:const LoginCoverPage(),
       routes: FBRouter.routers,
       onGenerateRoute: FBRouter.generateRoute,
@@ -41,12 +41,14 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-  Future _validateLogin() async{
+  Future validateLogin() async{
+    print("validateLogin");
     Future<dynamic> future = Future(()async{
       SharedPreferences prefs =await SharedPreferences.getInstance();
       return prefs.getBool("login");
     });
     future.then((val){
+      print(val);
       setState(() {
         loginState = val;
       });

@@ -36,12 +36,15 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   SliverGrid buildSliverGrid() {
+    double cellWidth = ((MediaQuery.of(context).size.width - 45) / 2);
+    double desiredCellHeight = 70;
+    double childAspectRatio = cellWidth / desiredCellHeight;
     return SliverGrid(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           crossAxisSpacing: 15,
           mainAxisSpacing: 10,
-          childAspectRatio: 2.8),
+          childAspectRatio: childAspectRatio),
       delegate: SliverChildBuilderDelegate(
         (BuildContext context, int index) {
           return buildItemWidget(index);

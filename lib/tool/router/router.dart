@@ -15,7 +15,6 @@ class FBRouter{
     MinePage.routeName : (ctx) => MinePage(),
   };
 
-
   static final RouteFactory generateRoute = (settings) {
     if (settings.name == "  ") {
       return MaterialPageRoute(

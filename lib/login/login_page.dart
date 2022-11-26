@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -6,10 +7,12 @@ import 'package:lib_network/dio_response.dart';
 import 'package:lib_network/dio_util.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:teacher/home/pages/home_page.dart';
+import 'package:teacher/login/login_cover_page.dart';
 import 'package:teacher/tool/encrypt/encrypt.dart';
+
 import '../widget/ly_input_widget.dart';
 
-class FBLoginPage extends StatefulWidget{
+class FBLoginPage extends StatefulWidget {
   static const String routeName = "/FBLoginPage";
 
   const FBLoginPage({Key? key}) : super(key: key);
@@ -34,6 +37,22 @@ class _FBLoginPageState extends State<FBLoginPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("登录"),
+        leading: Builder(
+          builder: (BuildContext context) {
+            return IconButton(
+              icon: const Icon(Icons.arrow_back_ios),
+              onPressed: () {
+                Navigator.of(context).pushNamed(LoginCoverPage.routeName);
+              },
+            );
+          },
+        ),
+//        actions: <Widget>[
+//          IconButton(
+//            icon: const Icon(Icons.menu),
+//            onPressed: () {},
+//          ),
+//        ],
       ),
       body: GestureDetector(
         behavior: HitTestBehavior.translucent,
@@ -101,7 +120,9 @@ class _FBLoginPageState extends State<FBLoginPage> {
                               style: ElevatedButton.styleFrom(
                                   minimumSize: const Size(100, 50)),
                               child: Text(
-                                "登录", style: TextStyle(fontSize: 18),),
+                                "登录",
+                                style: TextStyle(fontSize: 18),
+                              ),
                               onPressed: _loginIn,
                             ),
                           ),
@@ -109,16 +130,16 @@ class _FBLoginPageState extends State<FBLoginPage> {
                       ),
                     ),
                     GestureDetector(
-                      onTap: () {
-
-                      },
+                      onTap: () {},
                       child: Padding(
                         padding: const EdgeInsets.fromLTRB(0, 20, 0, 10),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             Text(
-                              "忘记密码?", style: TextStyle(color: Colors.blue),),
+                              "忘记密码?",
+                              style: TextStyle(color: Colors.blue),
+                            ),
                           ],
                         ),
                       ),
@@ -135,18 +156,20 @@ class _FBLoginPageState extends State<FBLoginPage> {
 
   ElevatedButton buildSendVerifiedButton() {
     var text = "获取验证码";
-    VoidCallback? onPressed = (_userPhone.isNotEmpty)
-        ? _sendVerifiedCode
-        : null;
-    if(_seconds == 0){
+    VoidCallback? onPressed =
+        (_userPhone.isNotEmpty) ? _sendVerifiedCode : null;
+    if (_seconds == 0) {
       text = "重新获取";
-    }else if(_seconds > 0){
-      text = "等待"+_seconds.toString()+"s";
+    } else if (_seconds > 0) {
+      text = "等待" + _seconds.toString() + "s";
       onPressed = null;
     }
     return ElevatedButton(
       style: ElevatedButton.styleFrom(minimumSize: const Size(100, 50)),
-      child: Text(text, style: TextStyle(fontSize: 14),),
+      child: Text(
+        text,
+        style: TextStyle(fontSize: 14),
+      ),
       onPressed: onPressed,
     );
   }
@@ -177,62 +200,63 @@ class _FBLoginPageState extends State<FBLoginPage> {
 
     Future info = Encrypt.encryption(_password);
     info.then((value) {
-      var url = "https://login.fenbi.com/employee/public/login?system=13.3&inhouse=1&app=oa&ua=iPhone&av=3&version=1.5.3&kav=3";
-      _requestLogin(url,value);
+      var url =
+          "https://login.fenbi.com/employee/public/login?system=13.3&inhouse=1&app=oa&ua=iPhone&av=3&version=1.5.3&kav=3";
+      _requestLogin(url, value);
     });
   }
 
-  _requestLogin (url,value) async {
-    Options options = Options(headers: {
-      Headers.contentTypeHeader:
-      Headers.formUrlEncodedContentType
-    },method: "post");
-    Map<String,dynamic> map = Map();
-    map['password']=value;
-    map['phone']=_userPhone;
-    map['verifycode']=_verifiedCode;
-    DioResponse result = await DioUtil().request(url,data: map,options: options);
+  _requestLogin(url, value) async {
+    Options options = Options(
+        headers: {Headers.contentTypeHeader: Headers.formUrlEncodedContentType},
+        method: "post");
+    Map<String, dynamic> map = Map();
+    map['password'] = value;
+    map['phone'] = _userPhone;
+    map['verifycode'] = _verifiedCode;
+    DioResponse result =
+        await DioUtil().request(url, data: map, options: options);
     print(result);
     if (result.code == DioResponseCode.SUCCESS) {
       _handleLoginSuccess(result.data);
       Navigator.of(context).pushNamed(MyHomePage.routeName);
     } else {
-      Fluttertoast.showToast(msg: "登录失败",gravity: ToastGravity.CENTER);
+      Fluttertoast.showToast(msg: "登录失败", gravity: ToastGravity.CENTER);
     }
   }
 
-
   _sendVerifiedCode() {
     int date = DateTime.now().millisecondsSinceEpoch;
-    String phone = "$_userPhone:"+"$date";
+    String phone = "$_userPhone:" + "$date";
     Future info = Encrypt.encryption(phone);
     info.then((value) {
-      var url = "http://login.fenbi.com/iphone/users/phone/verification?system=13.3&inhouse=1&app=oa&ua=iPhone&av=3&version=1.5.3&kav=3";
-      _requestVerifiedCode(url,value);
+      var url =
+          "http://login.fenbi.com/iphone/users/phone/verification?system=13.3&inhouse=1&app=oa&ua=iPhone&av=3&version=1.5.3&kav=3";
+      _requestVerifiedCode(url, value);
     });
   }
 
-  _requestVerifiedCode (url,value) async {
-    Options options = Options(headers: {
-      Headers.contentTypeHeader:
-      Headers.formUrlEncodedContentType
-    },method: "post");
-    Map<String,dynamic> map = Map();
-    map['info']=value;
-    map['type']="retrieve";
-    DioResponse result = await DioUtil().request(url,data:map,options:options);
-    if(result.code == DioResponseCode.SUCCESS){
+  _requestVerifiedCode(url, value) async {
+    Options options = Options(
+        headers: {Headers.contentTypeHeader: Headers.formUrlEncodedContentType},
+        method: "post");
+    Map<String, dynamic> map = Map();
+    map['info'] = value;
+    map['type'] = "retrieve";
+    DioResponse result =
+        await DioUtil().request(url, data: map, options: options);
+    if (result.code == DioResponseCode.SUCCESS) {
       var now = DateTime.now();
       var minutes = now.add(const Duration(minutes: 1)).difference(now);
       _seconds = minutes.inSeconds;
       startTimer();
-    }else{
-      Fluttertoast.showToast(msg: "获取验证码失败",gravity: ToastGravity.CENTER);
+    } else {
+      Fluttertoast.showToast(msg: "获取验证码失败", gravity: ToastGravity.CENTER);
     }
   }
 
   _handleLoginSuccess(data) async {
-    SharedPreferences prefs =await SharedPreferences.getInstance();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setBool("login", true);
 //    String url = 'http://tiku.fenbi.com/api/xingce/users/$userId?system=15.0&inhouse=1&app=oa&ua=iPhone&av=3&version=1.5.3&kav=3';
   }
@@ -265,5 +289,4 @@ class _FBLoginPageState extends State<FBLoginPage> {
     super.dispose();
     cancelTimer();
   }
-
 }
