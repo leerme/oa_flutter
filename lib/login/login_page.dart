@@ -175,6 +175,7 @@ class _FBLoginPageState extends State<FBLoginPage> {
   }
 
   _loginIn() async {
+    Navigator.of(context).pushNamed(MyHomePage.routeName);
     if (_userPhone.isEmpty) {
       Fluttertoast.showToast(
         msg: "请输入手机号",

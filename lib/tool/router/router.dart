@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:teacher/demo/demo_page.dart';
 import 'package:teacher/home/pages/home_page.dart';
 import 'package:teacher/login/login_cover_page.dart';
 import 'package:teacher/login/login_page.dart';
@@ -13,6 +14,7 @@ class FBRouter{
     MyHomePage.routeName : (ctx) => MyHomePage(),
     FBLoginPage.routeName : (ctx) => FBLoginPage(),
     MinePage.routeName : (ctx) => MinePage(),
+    DemoPage.routeName : (ctx) => DemoPage(),
   };
 
   static final RouteFactory generateRoute = (settings) {

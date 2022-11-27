@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:teacher/demo/demo_page.dart';
 import 'package:teacher/mine/mine_page.dart';
 import '../model/home_model.dart';
 import '../model/home_service.dart';
@@ -86,7 +87,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   _handleTap(index) {
     if (index == 0) {
-      Navigator.of(context).pushNamed(MinePage.routeName);
+      Navigator.of(context).pushNamed(DemoPage.routeName);
     }
   }
 }
