@@ -16,10 +16,9 @@ class DemoPage extends StatefulWidget {
 
 class _DemoPageState extends State<DemoPage> {
   List data = [
-    "介绍声明式布局介绍",
-    "添加或移除组件",
-    "理解Flutter布局约束",
-    "widget 做动画",];
+    "控件UI改变",
+    "常见的布局Widget",
+    "理解Flutter布局约束",];
 
   @override
   void initState() {
@@ -30,7 +29,7 @@ class _DemoPageState extends State<DemoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Demo"),
+        title: const Text("介绍声明式布局介绍"),
       ),
       body: ListView.builder(
         itemCount: data.length,
@@ -50,16 +49,17 @@ class _DemoPageState extends State<DemoPage> {
           title: Text(data[i])
       ),
       onTap: () {
-        if (i == 0){
-//          Navigator.push(context,MaterialPageRoute(builder: (context)=> const Demo0Page()));
-        }else if (i == 1){
-          Navigator.push(context,MaterialPageRoute(builder: (context)=> const Demo1Page()));
-        }else if (i == 2){
-          Navigator.push(context,MaterialPageRoute(builder: (context)=> const Demo2Page()));
-        }else if (i == 3){
-          Navigator.push(context,MaterialPageRoute(builder: (context)=> const Demo3Page(title:"动画")));
+        if (i == 0) {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const Demo1Page()));
+        } else if (i == 1) {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const Demo2Page()));
+        } else if (i == 2) {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const Demo3Page()));
         }
-      },
+      }
     );
   }
 }

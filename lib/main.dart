@@ -32,8 +32,8 @@ class MyAppState extends State<MyApp> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: loginState?const MyHomePage():const LoginCoverPage(),
-//      home:const MyHomePage(),
+//      home: loginState?const MyHomePage():const LoginCoverPage(),
+      home:const MyHomePage(),
 //      home:const LoginCoverPage(),
       routes: FBRouter.routers,
       onGenerateRoute: FBRouter.generateRoute,

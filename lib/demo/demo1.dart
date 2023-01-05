@@ -19,12 +19,9 @@ class _SampleAppPageState extends State<Demo1Page> {
 
   _getToggleChild() {
     if (toggle) {
-      return Text('Toggle One');
+      return Text('小',style: TextStyle(color: Colors.red,fontSize: 40),);
     } else {
-      return CupertinoButton(
-        onPressed: () {},
-        child: Text('Toggle Two'),
-      );
+      return Text('大',style: TextStyle(color: Colors.green,fontSize: 80));
     }
   }
 
@@ -32,7 +29,7 @@ class _SampleAppPageState extends State<Demo1Page> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Demo"),
+        title: Text("控件UI改变"),
       ),
       body: Center(
         child: _getToggleChild(),
@@ -40,7 +37,7 @@ class _SampleAppPageState extends State<Demo1Page> {
       floatingActionButton: FloatingActionButton(
         onPressed: _toggle,
         tooltip: 'Update Text',
-        child: Icon(Icons.update),
+        child: Icon(Icons.refresh),
       ),
     );
   }

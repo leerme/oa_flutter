@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+const white = Colors.white;
 const red = Colors.red;
 const green = Colors.green;
 const blue = Colors.blue;
@@ -13,7 +14,7 @@ class Demo2Page extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Demo"),
+        title: const Text("常见的布局Widget"),
       ),
       body: FlutterLayoutArticle([
         Example1(),
@@ -150,7 +151,7 @@ class _FlutterLayoutArticleState extends State<FlutterLayoutArticle> {
                           padding: const EdgeInsets.all(10.0),
                           child: Column(
                             children: [
-                              Center(child: Text(code)),
+                              Center(child: Text(code,style: TextStyle(fontSize: 20,color: blue),),),
                               const SizedBox(height: 15),
                               Text(
                                 explanation,
@@ -235,19 +236,13 @@ class Button extends StatelessWidget {
 
 class Example1 extends Example {
   const Example1({super.key});
-
   @override
-  final code = 'Container(color: red)';
-
+  final code = 'Text("Hello World")';
   @override
-  final explanation = 'The screen is the parent of the Container, '
-      'and it forces the Container to be exactly the same size as the screen.'
-      '\n\n'
-      'So the Container fills the screen and paints it red.';
-
+  final explanation = '';
   @override
   Widget build(BuildContext context) {
-    return Container(color: red);
+    return Container(color: white,child: Text('Hello World'),alignment:Alignment.center);
   }
 }
 
@@ -255,19 +250,19 @@ class Example1 extends Example {
 
 class Example2 extends Example {
   const Example2({super.key});
-
   @override
-  final code = 'Container(width: 100, height: 100, color: red)';
+  final code = 'Image.asset(images/lake.jpg, fit: BoxFit.contain,)';
   @override
-  final String explanation =
-      'The red Container wants to be 100x100, but it can\'t, '
-      'because the screen forces it to be exactly the same size as the screen.'
-      '\n\n'
-      'So the Container fills the screen.';
-
+  final String explanation = '';
   @override
   Widget build(BuildContext context) {
-    return Container(width: 100, height: 100, color: red);
+    return Container(
+      color: white,
+      child: Image.asset(
+        'assets/images/home_page/calendar.png',
+        fit: BoxFit.contain,
+      ),
+    );
   }
 }
 
@@ -277,20 +272,34 @@ class Example3 extends Example {
   const Example3({super.key});
 
   @override
-  final code = 'Center(\n'
-      '   child: Container(width: 100, height: 100, color: red))';
+  final code = '横向布局多个 widgets';
   @override
   final String explanation =
-      'The screen forces the Center to be exactly the same size as the screen, '
-      'so the Center fills the screen.'
-      '\n\n'
-      'The Center tells the Container that it can be any size it wants, but not bigger than the screen.'
-      'Now the Container can indeed be 100x100.';
+      'Column('
+  'mainAxisAlignment: MainAxisAlignment.spaceEvenly,'
+  'children: ['
+  'Image.asset("),'
+  'Image.asset("),'
+  'Image.asset("),'
+  '],'
+  ')';
 
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Container(width: 100, height: 100, color: red),
+      child: Container(
+        color: white,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Image.asset('assets/images/home_page/calendar.png'),
+            Image.asset('assets/images/home_page/salary.png'),
+            Image.asset('assets/images/home_page/offline.png'),
+            Image.asset('assets/images/home_page/arrange.png'),
+            Image.asset('assets/images/home_page/one2one.png'),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -299,23 +308,26 @@ class Example3 extends Example {
 
 class Example4 extends Example {
   const Example4({super.key});
-
   @override
-  final code = 'Align(\n'
-      '   alignment: Alignment.bottomRight,\n'
-      '   child: Container(width: 100, height: 100, color: red))';
+  final code = '纵向布局多个 widgets';
   @override
   final String explanation =
-      'This is different from the previous example in that it uses Align instead of Center.'
-      '\n\n'
-      'Align also tells the Container that it can be any size it wants, but if there is empty space it won\'t center the Container. '
-      'Instead, it aligns the Container to the bottom-right of the available space.';
+      '';
 
   @override
   Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.bottomRight,
-      child: Container(width: 100, height: 100, color: red),
+    return Center(
+      child: Container(
+        color: white,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Image.asset('assets/images/home_page/calendar.png'),
+            Image.asset('assets/images/home_page/salary.png'),
+            Image.asset('assets/images/home_page/offline.png'),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -326,24 +338,32 @@ class Example5 extends Example {
   const Example5({super.key});
 
   @override
-  final code = 'Center(\n'
-      '   child: Container(\n'
-      '              color: red,\n'
-      '              width: double.infinity,\n'
-      '              height: double.infinity))';
+  final code = '';
   @override
-  final String explanation =
-      'The screen forces the Center to be exactly the same size as the screen, '
-      'so the Center fills the screen.'
-      '\n\n'
-      'The Center tells the Container that it can be any size it wants, but not bigger than the screen.'
-      'The Container wants to be of infinite size, but since it can\'t be bigger than the screen, it just fills the screen.';
-
+  final String explanation = '';
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-          width: double.infinity, height: double.infinity, color: red),
+        color: white,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+
+            Image.asset('assets/images/home_page/calendar.png'),
+            Image.asset('assets/images/home_page/salary.png'),
+            Image.asset('assets/images/home_page/offline.png'),
+            Image.asset('assets/images/home_page/arrange.png'),
+            Image.asset('assets/images/home_page/one2one.png'),
+
+//            Expanded(child:Image.asset('assets/images/home_page/calendar.png'),flex: 1),
+//            Expanded(child: Image.asset('assets/images/home_page/salary.png'),flex: 2),
+//            Expanded(child: Image.asset('assets/images/home_page/offline.png'), flex: 3),
+//            Expanded(child: Image.asset('assets/images/home_page/arrange.png'),flex: 4),
+//            Expanded(child: Image.asset('assets/images/home_page/one2one.png'),flex: 5),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -354,7 +374,7 @@ class Example6 extends Example {
   const Example6({super.key});
 
   @override
-  final code = 'Center(child: Container(color: red))';
+  final code = '手势';
   @override
   final String explanation =
       'The screen forces the Center to be exactly the same size as the screen, '
@@ -371,7 +391,26 @@ class Example6 extends Example {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Container(color: red),
+      child: GestureDetector(
+        onTap: () {
+          print('onTap');
+        },
+        onLongPress: (){
+          print('onLongPress');
+        },
+        child: Container(
+          height: 50.0,
+          padding: const EdgeInsets.all(8.0),
+          margin: const EdgeInsets.symmetric(horizontal: 8.0),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(5.0),
+            color: Colors.red,
+          ),
+          child: const Center(
+            child: Text('手势'),
+          ),
+        ),
+      ),
     );
   }
 }
