@@ -240,10 +240,7 @@ class Example1 extends Example {
   final code = 'Container(color: red)';
 
   @override
-  final explanation = 'The screen is the parent of the Container, '
-      'and it forces the Container to be exactly the same size as the screen.'
-      '\n\n'
-      'So the Container fills the screen and paints it red.';
+  final explanation = '整个屏幕作为 Container 的父级，并且强制 Container 变成和屏幕一样的大小。所以这个 Container 充满了整个屏幕，并绘制成红色。';
 
   @override
   Widget build(BuildContext context) {
@@ -260,10 +257,7 @@ class Example2 extends Example {
   final code = 'Container(width: 100, height: 100, color: red)';
   @override
   final String explanation =
-      'The red Container wants to be 100x100, but it can\'t, '
-      'because the screen forces it to be exactly the same size as the screen.'
-      '\n\n'
-      'So the Container fills the screen.';
+      '红色的 Container 想要变成 100 x 100 的大小，但是它无法变成，因为屏幕强制它变成和屏幕一样的大小。所以 Container 充满了整个屏幕';
 
   @override
   Widget build(BuildContext context) {
@@ -281,11 +275,7 @@ class Example3 extends Example {
       '   child: Container(width: 100, height: 100, color: red))';
   @override
   final String explanation =
-      'The screen forces the Center to be exactly the same size as the screen, '
-      'so the Center fills the screen.'
-      '\n\n'
-      'The Center tells the Container that it can be any size it wants, but not bigger than the screen.'
-      'Now the Container can indeed be 100x100.';
+      '屏幕强制 Center 变得和屏幕一样大，所以 Center 充满了屏幕。然后 Center 告诉 Container 可以变成任意大小，但是不能超出屏幕。现在，Container 可以真正变成 100 × 100 大小了';
 
   @override
   Widget build(BuildContext context) {
@@ -306,10 +296,7 @@ class Example4 extends Example {
       '   child: Container(width: 100, height: 100, color: red))';
   @override
   final String explanation =
-      'This is different from the previous example in that it uses Align instead of Center.'
-      '\n\n'
-      'Align also tells the Container that it can be any size it wants, but if there is empty space it won\'t center the Container. '
-      'Instead, it aligns the Container to the bottom-right of the available space.';
+      'Align 同样也告诉 Container，你可以变成任意大小。但是，如果还留有空白空间的话，它不会居中 Container。相反，它将会在允许的空间内，把 Container 放在右下角（bottomRight）';
 
   @override
   Widget build(BuildContext context) {
@@ -333,11 +320,7 @@ class Example5 extends Example {
       '              height: double.infinity))';
   @override
   final String explanation =
-      'The screen forces the Center to be exactly the same size as the screen, '
-      'so the Center fills the screen.'
-      '\n\n'
-      'The Center tells the Container that it can be any size it wants, but not bigger than the screen.'
-      'The Container wants to be of infinite size, but since it can\'t be bigger than the screen, it just fills the screen.';
+      '屏幕强制 Center 变得和屏幕一样大，所以 Center 充满屏幕。然后 Center 告诉 Container 可以变成任意大小，但是不能超出屏幕。现在，Container 想要无限的大小，但是由于它不能比屏幕更大，所以就仅充满屏幕';
 
   @override
   Widget build(BuildContext context) {
@@ -357,16 +340,7 @@ class Example6 extends Example {
   final code = 'Center(child: Container(color: red))';
   @override
   final String explanation =
-      'The screen forces the Center to be exactly the same size as the screen, '
-      'so the Center fills the screen.'
-      '\n\n'
-      'The Center tells the Container that it can be any size it wants, but not bigger than the screen.'
-      '\n\n'
-      'Since the Container has no child and no fixed size, it decides it wants to be as big as possible, so it fills the whole screen.'
-      '\n\n'
-      'But why does the Container decide that? '
-      'Simply because that\'s a design decision by those who created the Container widget. '
-      'It could have been created differently, and you have to read the Container documentation to understand how it behaves, depending on the circumstances. ';
+      '屏幕强制 Center 变得和屏幕一样大，所以 Center 充满屏幕。然后 Center 告诉 Container 可以变成任意大小，但是不能超出屏幕。由于 Container 没有子级而且没有固定大小，所以它决定能有多大就有多大，所以它充满了整个屏幕';
 
   @override
   Widget build(BuildContext context) {
@@ -387,18 +361,7 @@ class Example7 extends Example {
       '      child: Container(color: green, width: 30, height: 30)))';
   @override
   final String explanation =
-      'The screen forces the Center to be exactly the same size as the screen, '
-      'so the Center fills the screen.'
-      '\n\n'
-      'The Center tells the red Container that it can be any size it wants, but not bigger than the screen.'
-      'Since the red Container has no size but has a child, it decides it wants to be the same size as its child.'
-      '\n\n'
-      'The red Container tells its child that it can be any size it wants, but not bigger than the screen.'
-      '\n\n'
-      'The child is a green Container that wants to be 30x30.'
-      '\n\n'
-      'Since the red `Container` has no size but has a child, it decides it wants to be the same size as its child. '
-      'The red color isn\'t visible, since the green Container entirely covers all of the red Container.';
+      '屏幕强制 Center 变得和屏幕一样大，所以 Center 充满屏幕。然后 Center 告诉红色的 Container 可以变成任意大小，但是不能超出屏幕。由于 Container 没有固定大小但是有子级，所以它决定变成它 child 的大小。然后红色的 Container 告诉它的 child 可以变成任意大小，但是不能超出屏幕。而它的 child 是一个想要 30 × 30 大小绿色的 Container。由于红色的 Container 和其子级一样大，所以也变为 30 × 30。由于绿色的 Container 完全覆盖了红色 Container，所以你看不见它了';
 
   @override
   Widget build(BuildContext context) {
@@ -423,9 +386,7 @@ class Example8 extends Example {
       '      child: Container(color: green, width: 30, height: 30)))';
   @override
   final String explanation =
-      'The red Container sizes itself to its children size, but it takes its own padding into consideration. '
-      'So it is also 30x30 plus padding. '
-      'The red color is visible because of the padding, and the green Container has the same size as in the previous example.';
+      '红色 Container 变为其子级的大小，但是它将其 padding 带入了约束的计算中。所以它有一个 30 x 30 的外边距。由于这个外边距，所以现在你能看见红色了。而绿色的 Container 则还是和之前一样。';
 
   @override
   Widget build(BuildContext context) {
@@ -452,12 +413,7 @@ class Example9 extends Example {
       '      child: Container(color: red, width: 10, height: 10)))';
   @override
   final String explanation =
-      'You might guess that the Container has to be between 70 and 150 pixels, but you would be wrong. '
-      'The ConstrainedBox only imposes ADDITIONAL constraints from those it receives from its parent.'
-      '\n\n'
-      'Here, the screen forces the ConstrainedBox to be exactly the same size as the screen, '
-      'so it tells its child Container to also assume the size of the screen, '
-      'thus ignoring its \'constraints\' parameter.';
+      'Container 的尺寸会在 70 到 150 像素之间，但并不是这样。 ConstrainedBox 仅对其从其父级接收到的约束下施加其他约束。在这里，屏幕迫使 ConstrainedBox 与屏幕大小完全相同，因此它告诉其子 Widget 也以屏幕大小作为约束，从而忽略了其 constraints 参数带来的影响';
 
   @override
   Widget build(BuildContext context) {
@@ -487,11 +443,7 @@ class Example10 extends Example {
       '        child: Container(color: red, width: 10, height: 10))))';
   @override
   final String explanation =
-      'Now, Center allows ConstrainedBox to be any size up to the screen size.'
-      '\n\n'
-      'The ConstrainedBox imposes ADDITIONAL constraints from its \'constraints\' parameter onto its child.'
-      '\n\n'
-      'The Container must be between 70 and 150 pixels. It wants to have 10 pixels, so it will end up having 70 (the MINIMUM).';
+      'Center 允许 ConstrainedBox 达到屏幕可允许的任意大小。 ConstrainedBox 将 constraints 参数带来的约束附加到其子对象上。Container 必须介于 70 到 150 像素之间。虽然它希望自己有 10 个像素大小，但最终获得了 70 个像素（最小为 70）';
 
   @override
   Widget build(BuildContext context) {
@@ -523,10 +475,7 @@ class Example11 extends Example {
       '        child: Container(color: red, width: 1000, height: 1000))))';
   @override
   final String explanation =
-      'Center allows ConstrainedBox to be any size up to the screen size.'
-      'The ConstrainedBox imposes ADDITIONAL constraints from its \'constraints\' parameter onto its child'
-      '\n\n'
-      'The Container must be between 70 and 150 pixels. It wants to have 1000 pixels, so it ends up having 150 (the MAXIMUM).';
+      'Center 允许 ConstrainedBox 达到屏幕可允许的任意大小。 ConstrainedBox 将 constraints 参数带来的约束附加到其子对象上。Container 必须介于 70 到 150 像素之间。虽然它希望自己有 1000 个像素大小，但最终获得了 150 个像素（最大为 150）';
 
   @override
   Widget build(BuildContext context) {
@@ -558,10 +507,7 @@ class Example12 extends Example {
       '        child: Container(color: red, width: 100, height: 100))))';
   @override
   final String explanation =
-      'Center allows ConstrainedBox to be any size up to the screen size.'
-      'ConstrainedBox imposes ADDITIONAL constraints from its \'constraints\' parameter onto its child.'
-      '\n\n'
-      'The Container must be between 70 and 150 pixels. It wants to have 100 pixels, and that\'s the size it has, since that\'s between 70 and 150.';
+      'Center 允许 ConstrainedBox 达到屏幕可允许的任意大小。 ConstrainedBox 将 constraints 参数带来的约束附加到其子对象上。Container 必须介于 70 到 150 像素之间。虽然它希望自己有 100 个像素大小，因为 100 介于 70 至 150 的范围内，所以最终获得了 100 个像素';
 
   @override
   Widget build(BuildContext context) {
@@ -589,8 +535,7 @@ class Example13 extends Example {
       '   child: Container(color: red, width: 20, height: 50));';
   @override
   final String explanation =
-      'The screen forces the UnconstrainedBox to be exactly the same size as the screen.'
-      'However, the UnconstrainedBox lets its child Container be any size it wants.';
+      '屏幕强制 UnconstrainedBox 变得和屏幕一样大，而 UnconstrainedBox 允许其子级的 Container 可以变为任意大小';
 
   @override
   Widget build(BuildContext context) {
@@ -610,11 +555,7 @@ class Example14 extends Example {
       '   child: Container(color: red, width: 4000, height: 50));';
   @override
   final String explanation =
-      'The screen forces the UnconstrainedBox to be exactly the same size as the screen, '
-      'and UnconstrainedBox lets its child Container be any size it wants.'
-      '\n\n'
-      'Unfortunately, in this case the Container has 4000 pixels of width and is too big to fit in the UnconstrainedBox, '
-      'so the UnconstrainedBox displays the much dreaded "overflow warning".';
+      '屏幕强制 UnconstrainedBox 变得和屏幕一样大，而 UnconstrainedBox 允许其子级的 Container 可以变为任意大小。不幸的是，在这种情况下，容器的宽度为 4000 像素，这实在是太大，以至于无法容纳在 UnconstrainedBox 中，因此 UnconstrainedBox 将显示溢出警告（overflow warning';
 
   @override
   Widget build(BuildContext context) {
@@ -638,13 +579,7 @@ class Example15 extends Example {
       '   child: Container(color: red, width: 4000, height: 50));';
   @override
   final String explanation =
-      'The screen forces the OverflowBox to be exactly the same size as the screen, '
-      'and OverflowBox lets its child Container be any size it wants.'
-      '\n\n'
-      'OverflowBox is similar to UnconstrainedBox, and the difference is that it won\'t display any warnings if the child doesn\'t fit the space.'
-      '\n\n'
-      'In this case the Container is 4000 pixels wide, and is too big to fit in the OverflowBox, '
-      'but the OverflowBox simply shows as much as it can, with no warnings given.';
+      '屏幕强制 OverflowBox 变得和屏幕一样大，并且 OverflowBox 允许其子容器设置为任意大小。OverflowBox 与 UnconstrainedBox 类似，但不同的是，如果其子级超出该空间，它将不会显示任何警告。在这种情况下，容器的宽度为 4000 像素，并且太大而无法容纳在 OverflowBox 中，但是 OverflowBox 会全部显示，而不会发出警告。';
 
   @override
   Widget build(BuildContext context) {
@@ -668,13 +603,7 @@ class Example16 extends Example {
       '   child: Container(color: Colors.red, width: double.infinity, height: 100));';
   @override
   final String explanation =
-      'This won\'t render anything, and you\'ll see an error in the console.'
-      '\n\n'
-      'The UnconstrainedBox lets its child be any size it wants, '
-      'however its child is a Container with infinite size.'
-      '\n\n'
-      'Flutter can\'t render infinite sizes, so it throws an error with the following message: '
-      '"BoxConstraints forces an infinite width."';
+      '这将不会渲染任何东西，而且你能在控制台看到错误信息。UnconstrainedBox 让它的子级决定成为任何大小，但是其子级是一个具有无限大小的 Container。Flutter 无法渲染无限大的东西，所以它抛出以下错误： BoxConstraints forces an infinite width.（盒子约束强制使用了无限的宽度）';
 
   @override
   Widget build(BuildContext context) {
@@ -730,12 +659,7 @@ class Example18 extends Example {
       '   child: Text(\'Some Example Text.\'));';
   @override
   final String explanation =
-      'The screen forces the FittedBox to be exactly the same size as the screen.'
-      'The Text has some natural width (also called its intrinsic width) that depends on the amount of text, its font size, and so on.'
-      '\n\n'
-      'The FittedBox lets the Text be any size it wants, '
-      'but after the Text tells its size to the FittedBox, '
-      'the FittedBox scales the Text until it fills all of the available width.';
+      '这次你就不会遇到报错了。 UnconstrainedBox 给 LimitedBox 一个无限的大小；但它向其子级传递了最大为 100 的约束。如果你将 UnconstrainedBox 替换为 Center，则LimitedBox 将不再应用其限制（因为其限制仅在获得无限约束时才适用），并且容器的宽度允许超过 100。上面的样例解释了 LimitedBox 和 ConstrainedBox 之间的区别';
 
   @override
   Widget build(BuildContext context) {
@@ -756,12 +680,7 @@ class Example19 extends Example {
       '      child: Text(\'Some Example Text.\')));';
   @override
   final String explanation =
-      'But what happens if you put the FittedBox inside of a Center widget? '
-      'The Center lets the FittedBox be any size it wants, up to the screen size.'
-      '\n\n'
-      'The FittedBox then sizes itself to the Text, and lets the Text be any size it wants.'
-      '\n\n'
-      'Since both FittedBox and the Text have the same size, no scaling happens.';
+      '但如果你将 FittedBox 放进 Center widget 中会发生什么？ Center 将会让 FittedBox 能够变为任意大小，取决于屏幕大小。FittedBox 然后会根据 Text 调整自己的大小，然后让 Text 可以变为所需的任意大小，由于二者具有同一大小，因此不会发生缩放';
 
   @override
   Widget build(BuildContext context) {
