@@ -13,7 +13,6 @@ class HomeAppBar extends AppBar {
         width: 19,
       ),
       onPressed: () {
-//        NativeMethodChannel().jumpToMineMethod();
         Navigator.of(context).pushNamed(MinePage.routeName);
       },
     ),
@@ -25,7 +24,8 @@ class HomeAppBar extends AppBar {
             width: 50,
           ),
           onPressed: () {
-            HomeService().getHttp();
+//            HomeService().getHttp();
+            NativeMethodChannel().jumpToMineMethod();
           })
     ],
   );
